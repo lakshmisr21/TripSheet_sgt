@@ -1,0 +1,38 @@
+<div>
+    <label>Tript Sheet Number</label>
+    <input type="text" name="title" value="<%= book.title %>">
+  </div>
+  <div>
+    <label>Vehicl Number</label>
+    <input 
+    type="text" 
+    name="description" 
+    pattern="[A-Z]{2}[0-9]{1,2}[A-Z]{1,2}[0-9]{4}" title="KA99AA9999/KA99A9999"
+    value="<%= book.description %>">
+  </div>
+  <div>
+    <label>Place</label>
+    <select name="author">
+    <% authors.forEach(author => { %>
+      <% if (author.id === book.author) { %>
+        <option selected label="<%= author.name %>" value="<%= author.id %>">
+      <% } else { %>
+        <option label="<%= author.name %>" value="<%= author.id %>">
+      <% } %>
+    <% }) %>
+    </select>
+  </div>
+  <div>
+    <label>Trip Date</label>
+    <input type="date" name="publishDate"
+          value="<%= book.publishDate == null ? '' : book.publishDate.toISOString().split('T')[0] %>">
+  </div>
+  <div>
+    <label>Page Count</label>
+    <input type="number" name="pageCount" min="1" value="<%= book.pageCount %>">
+  </div>
+  <div>
+    <label>Upload Trip Sheet Photo</label>
+    <input type="file" name="cover" class="filepond">
+  </div>
+  

@@ -1,0 +1,30 @@
+<h2>Search TripSheet</h2>
+<form action="/books" method="GET">
+  <div>
+    <label>Trip Sheet Number</label>
+    <input type="text" name="title" value="<%= searchOptions.title %>">
+  </div>
+  <div>
+    <label>Vehicl Number</label>
+    <input type="text" name="description" 
+    pattern="[A-Z]{2}[0-9]{1,2}[A-Z]{1,2}[0-9]{4}" title="KA99AA9999/KA99A9999"
+    value="<%= searchOptions.description %>">
+  </div>
+  <div>
+    <label>Trip Date After</label>
+    <input type="date" name="publishedAfter" value="<%= searchOptions.publishedAfter %>">
+  </div>
+  <div>
+    <label>Trip Date Before</label>
+    <input type="date" name="publishedBefore" value="<%= searchOptions.publishedBefore %>">
+  </div>
+  <button type="submit">Search</button>
+  <a href="/books">Cancel</a>
+</form>
+<div>
+  <% books.forEach(book => { %>
+    <a href="/books/<%= book.id %>">
+      <img height="500" width="450" src="<%= book.coverImagePath %>">
+    </a>
+  <% }) %>
+</div>
