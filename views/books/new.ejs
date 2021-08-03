@@ -1,6 +1,11 @@
-<h2>New Trip Sheet</h2>
-<form action="/books" method="POST">
-  <a href="/books">Cancel</a>
-  <button type="submit">Create</button>
+<h1>New Trip Sheet</h1>
+
+<form action="/books/books" method="POST">
+  <div> 
+    <button class='btn btn' type="submit">Create</button> 
+    <button> <a class='btn btn' href="/books/new">Cancel </a></button>
+    <button> <a class='btn btn' href="/home.html">Back </a></button>
+  </div>
+
   <%- include('_form_fields') %>
-  </form>
+</form>

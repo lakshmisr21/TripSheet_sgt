@@ -5,7 +5,7 @@ const Author = require('../models/author')
 const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif','image/jpg']
 
 // SEARCH from All Books Route
-router.get('/', async (req, res) => {
+router.get('/books', async (req, res) => {
   let query = Book.find()
   if (req.query.title != null && req.query.title != '') {
     query = query.regex('title', new RegExp(req.query.title, 'i'))
@@ -26,7 +26,7 @@ router.get('/', async (req, res) => {
       searchOptions: req.query
     })
   } catch {
-    res.redirect('/')
+    res.redirect('books/books')
   }
 })
 
@@ -36,7 +36,7 @@ router.get('/new', async (req, res) => {
 })
 
 // Create Book Route
-router.post('/', async (req, res) => {
+router.post('/books', async (req, res) => {
   const book = new Book({
     title: req.body.title,
     author: req.body.author,
@@ -54,6 +54,17 @@ router.post('/', async (req, res) => {
   }
 })
 
+//Take Photo
+/*
+router.get('/takephoto',(req,res)=>{
+  res.send('Welcome to Photo Selfy Page')
+})
+
+router.post('/takephoto',(req,res)=>{
+  //res.render('/public/takephoto.html')
+})
+*/
+
 // Show Book Route
 router.get('/:id', async (req, res) => {
   try {
@@ -62,7 +73,7 @@ router.get('/:id', async (req, res) => {
                            .exec()
     res.render('books/show', { book: book })
   } catch {
-    res.redirect('/')
+    res.redirect('/books')
   }
 })
 
@@ -72,14 +83,13 @@ router.get('/:id/edit', async (req, res) => {
     const book = await Book.findById(req.params.id)
     renderEditPage(res, book)
   } catch {
-    res.redirect('/')
+    res.redirect('/books')
   }
 })
 
 // Update Book Route
 router.put('/:id', async (req, res) => {
   let book
-
   try {
     book = await Book.findById(req.params.id)
     book.title = req.body.title
@@ -115,10 +125,13 @@ router.delete('/:id', async (req, res) => {
         errorMessage: 'Could not remove book'
       })
     } else {
-      res.redirect('/')
+      res.redirect('/books')
     }
   }
 })
+
+
+
 
 async function renderNewPage(res, book, hasError = false) {
   renderFormPage(res, book, 'new', hasError)
@@ -156,5 +169,6 @@ function saveCover(book, coverEncoded) {
     book.coverImageType = cover.type
   }
 }
+
 
 module.exports = router

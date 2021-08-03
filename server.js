@@ -2,15 +2,20 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
   }
   
-  const express = require('express')
-  const app = express()
-  const expressLayouts = require('express-ejs-layouts')
-  const bodyParser = require('express')
-  const methodOverride = require('method-override')
+const express = require('express')
+const app = express()
+const expressLayouts = require('express-ejs-layouts')
+const bodyParser = require('express')
+const passport = require('passport')
+//const flash = require('express-flash')
+//const session = require('express-session')
+const methodOverride = require('method-override')
 
-  const indexRouter = require('./routes/index')
-  const authorRouter = require('./routes/authors')
-  const bookRouter = require('./routes/books')
+const loginRouter = require('./routes/login')
+const userRouter = require('./routes/user')
+const authorRouter = require('./routes/authors')
+const bookRouter = require('./routes/books')
+const reportsRouter = require('./routes/reports')
   
   app.set('view engine', 'ejs')
   app.set('views', __dirname + '/views')
@@ -21,13 +26,17 @@ if (process.env.NODE_ENV !== 'production') {
   app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }))
   
   const mongoose = require('mongoose')
-  mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true })
+  mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true,useUnifiedTopology: true,useCreateIndex: true })
   const db = mongoose.connection
   db.on('error', error => console.error(error))
   db.once('open', () => console.log('Connected to Mongoose'))
   
-  app.use('/', indexRouter)
+  app.use('/', loginRouter)
+  app.use('/',userRouter)
   app.use('/authors', authorRouter)
   app.use('/books', bookRouter)
+  app.use('/reports',reportsRouter)
+
+
   
   app.listen(process.env.PORT || 3000)

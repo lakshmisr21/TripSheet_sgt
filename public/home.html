@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Home</title>
+</head>
+<body>
+  <header>
+  <link rel="stylesheet" href="/stylesheets/main.css">
+  <nav class="header-nav">
+    <a class="header-title" href="home.html"><H1>Trip Sheet Home Page</H1></a>
+ 
+    <ul>
+      <li class="header-link"><a href="books/books">Search TripSheet</a></li>
+      <li class="header-link"><a href="/books/new">Add TripSheet</a></li>
+      <form class="header-link" action="/logout?_method=DELETE" method="POST">
+        <div>
+          <button class="btn btn" type="submit">Log Out</button>
+        </div>
+       </form>
+      <button class="btn btn"> <a href="change-password.html" >Change Password </a> </button>
+    </ul>
+</nav>  
+</header>
+<!--
+Script to prevent back post logged out
+<script type="text/javascript">
+  function preventBack() { window.history.forward(); }
+  setTimeout("preventBack()", 0);
+  window.onunload = function () { null };
+</script>
+-->
+</body>
+</html>
+
+
+

@@ -1,11 +1,12 @@
 <h2><%= author.name %></h2>
-<a href="/authors/<%= author.id %>/edit">Edit</a>
+<link rel="stylesheet" href="/public/stylesheets/main.css">
+<button> <a class="btn btn" href="/authors/<%= author.id %>/edit">Edit</a> </button>
 <%- include('../partials/deleteForm',
             { url: `/authors/${author.id}` }) %>
 <% if (booksByAuthor.length > 0) { %>
-  <h2>Books By Author</h2>
+  <h2>Trip Sheets of Selected Place</h2>
   <% booksByAuthor.forEach(book => { %>
-    <a href="/books/<%= book.id %>">
+    <a href="/books/<%= book.id %>" >
       <img height="150" width="100" src="<%= book.coverImagePath %>">
     </a>
   <% }) %>

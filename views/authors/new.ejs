@@ -1,6 +1,9 @@
-<h2>New Place</h2>
-<form action="/authors" method="POST">
+<h2>Add New Place</h2>
+<link rel="stylesheet" href="/public/stylesheets/main.css">
+<div>  
+  <form class="btn btn" action="/authors" method="POST">
   <%- include('_form_fields') %>
-  <a href="/authors">Cancel</a>
-  <button type="submit">Create</button>
+  <button>  <a class="btn btn" href="/authors" >Cancel</a> </button>
+  <button class="btn btn" type="submit">Create</button>
+</div>
 </form>

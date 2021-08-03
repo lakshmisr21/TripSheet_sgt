@@ -6,4 +6,6 @@
 <div>Page Count: <%= book.pageCount %></div>
 <a href="/books/<%= book.id %>/edit">Edit</a>
 <%- include('../partials/deleteForm', { url: `/books/${book.id}` }) %>
-<a href="/authors/<%= book.author.id %>">View Places</a>
+<!--<a href="/authors/<%= book.author.id %>">View Places</a>-->
+<button> <a class='btn btn' href="/books/books">Back </a></button>
+

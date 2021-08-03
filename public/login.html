@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Login</title>
+	</head>
+
+<header>
+	<link rel="stylesheet" href="/stylesheets/main.css">	
+</header>
+<body>
+	<h1>Login</h1>
+	<form class="input" id="login-form">
+			<input type="number" autocomplete="off" id="mobile" placeholder="Mobile" />
+			<input type="password" autocomplete="off" id="password" placeholder="Password" />
+			<input type="submit" value="Submit" /> 
+	</form>
+
+
+		<script>
+			const form = document.getElementById('login-form')
+			form.addEventListener('submit', loginUser)
+
+			async function loginUser(event) {
+				event.preventDefault()
+				const mobile = document.getElementById('mobile').value
+				const password = document.getElementById('password').value
+
+				const result = await fetch('/api/login', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						mobile,
+						password
+					})
+				}).then((res) => res.json())
+
+				if (result.status === 'ok') {
+					// everythign went fine
+					console.log('Got the token: ', result.data)
+					localStorage.setItem('token', result.data)
+					//alert('Log In Success!')
+					window.location.href='/home.html' //navigating to Home page post successfuly log in
+				} else {
+					alert(result.error)
+					//window.location.href='/login'
+				}
+			}
+		</script>
+	</body>
+</html>
