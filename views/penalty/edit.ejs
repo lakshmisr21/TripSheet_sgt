@@ -1,0 +1,19 @@
+<h2>Edit Penalty Received Amount</h2>
+
+<form action="/penalty/<%= penalty.id %>?_method=PUT" method="POST">
+  <a href="/penalty/penalty">Cancel</a>
+  <button class="btn btn" type="submit">Update</button>
+   <div>
+    <label>Update Received Amount</label>
+    <input type="number" name="receivedamount">
+  </div>
+  <div>
+    <label>Penalty Status</label>
+    <input type="text" name="status" value="Closed">
+  </div>
+  <div>
+    <label>Upload Receipt Photo</label>
+    <input type="file" name="receipt" class="filepond">
+  </div>
+</form>
+  

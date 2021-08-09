@@ -1,0 +1,17 @@
+<h2><%= penalty.title %></h2>
+<img width="500" height="650" src="<%= penalty.coverImagePath %>">
+<img width="500" height="650" src="<%= penalty.receiptImagePath %>">
+<div>Penalty Date: <%= penalty.penaltydate.toDateString() %></div>
+<div>Vehicl Number: <%= penalty.vehnum %></div>
+<div>Penalty Place: <%= penalty.penaltyplace %></div>
+<div>GC Number: <%= penalty.gcnum %></div>
+<div>Party Name: <%= penalty.partyname %></div>
+<div>Penalty Amount: <%= penalty.penaltyamount %></div>
+<div>Received Amount: <%= penalty.receivedamount %></div>
+<div>Modified Date: <%= penalty.modifiedDate.toDateString() %></div>
+<div>Status: <%= penalty.status %></div>
+<!--<a href="penalty/penalty/<%= penalty.id %>/edit">Edit</a> 
+<%- include('../partials/deleteForm', { url: `/penalty/${penalty.id}` }) %>--> 
+
+<button> <a class='btn btn' href="/penalty/penalty">Back </a></button>
+

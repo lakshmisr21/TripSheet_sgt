@@ -1,0 +1,22 @@
+<h2>Search Registered Users</h2>
+<form action="/users" method="GET">
+<div>  <input type="number" name="mobile" placeholder="Enter Mobile" value="<%= searchOptions.mobile %>"> </div> 
+<div><button class="btn btn" type="submit">Search</button> </div>
+</form>
+<br>
+<table>
+ <tr>
+  <th>
+<% users.forEach(User => { %> 
+<div class="input-row">
+  <div class="input-name">
+  <%= User.name %>  | <%= User.mobile %> |  
+  <a href="users/<%= User.id %>/edit">Edit</a> |</div>
+  <%- include('../partials/deleteForm',
+  {url: `/users/${User.id}` }) %> </div>
+  <% }) %> 
+
+  </th> 
+</tr>
+<br>
+</table>  

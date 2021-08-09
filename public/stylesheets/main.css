@@ -2,7 +2,7 @@
     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
     font-size: large;
     background:rgb(187, 243, 114);
-    color:darkmagenta;
+    color:rgb(235, 81, 10);
     align-content: center;
 }
     
@@ -26,10 +26,6 @@
     display: inline-block;
 }
 
-:root{
-    --nav-title-font-size:2rem;
-    --nav-title-font-weight:bold;  
-  }
   
   .header-title{
       color:rgb(6, 100, 27);
@@ -64,8 +60,13 @@
       padding: 1rem;
   }
 
+  .dropdown {
+    position: relative;
+    display: inline-block;
+  }
+
   .btn{
-      border:rgb(179, 104, 7) 1px solid;
+      border:rgb(24, 23, 23) 1px solid;
       border-radius: .5rem;
       padding:.5rem 1rem;
       font-size: 1.2rem;
@@ -75,8 +76,8 @@
       text-align-last: center;
       display: flex;
       align-items: flex-start;
-      color: limegreen;
-      background-color: rgb(19, 18, 17);
+      color:rgb(6, 18, 190);
+      background-color: rgb(10, 209, 110);
   }
 
   a: link {
@@ -105,13 +106,41 @@
       border-radius: 4px;
   }
 
+  .input-row{
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1rem;
+  }
+
+  .input-name{
+      font-size: 1.5rem;
+  }
+
   .column_count {
     column-count: 2;
   }
 
-  table, th, td {
-    border: 1px solid black;
+  table {
+    border-collapse: collapse;
   }
+
+  table.list{
+      width: 100%;
+  }
+
+table{
+    width:80%;
+        
+}
+
+header td,tr,th{
+    background-color: rgb(250, 180, 148);
+    border:1px solid rgb(247, 61, 4);
+    text-align: left;
+    padding: 8px;
+    color: rgb(14, 13, 13);
+}
+
 
 
    #video {
@@ -160,51 +189,4 @@
         text-align: center;
     }
 
-    /* Camera/WebCam Styles */
-
-    #video {
-        border: 1px solid black;
-        width: 320px;
-        height: 240px;
-    }
-
-    #photo {
-        border: 1px solid black;
-        width: 320px;
-        height: 240px;
-    }
-
-    #canvas {
-        display: none;
-    }
-
-    .camera {
-        width: 340px;
-        display: inline-block;
-    }
-
-    .output {
-        width: 340px;
-        display: inline-block;
-    }
-
-    #startbutton {
-        display: block;
-        position: relative;
-        margin-left: auto;
-        margin-right: auto;
-        bottom: 36px;
-        padding: 5px;
-        background-color: #6a67ce;
-        border: 1px solid rgba(255, 255, 255, 0.7);
-        font-size: 14px;
-        color: rgba(255, 255, 255, 1.0);
-        cursor: pointer;
-    }
-
-    .contentarea {
-        font-size: 16px;
-        font-family: Arial;
-        text-align: center;
-    }
-
+    

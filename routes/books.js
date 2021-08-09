@@ -2,7 +2,7 @@ const express = require('express')
 const router = express.Router()
 const Book = require('../models/book')
 const Author = require('../models/author')
-const imageMimeTypes = ['image/jpeg', 'image/png', 'images/gif','image/jpg']
+const imageMimeTypes = ['image/jpeg','image/JPG', 'image/png', 'images/gif','image/jpg']
 
 // SEARCH from All Books Route
 router.get('/books', async (req, res) => {
@@ -45,25 +45,13 @@ router.post('/books', async (req, res) => {
     description: req.body.description
   })
   saveCover(book, req.body.cover)
- 
-  try {
+   try {
     const newBook = await book.save()
-    res.redirect(`books/${newBook.id}`)
+    res.redirect(`/books/${newBook.id}`)
   } catch {
     renderNewPage(res, book, true)
   }
 })
-
-//Take Photo
-/*
-router.get('/takephoto',(req,res)=>{
-  res.send('Welcome to Photo Selfy Page')
-})
-
-router.post('/takephoto',(req,res)=>{
-  //res.render('/public/takephoto.html')
-})
-*/
 
 // Show Book Route
 router.get('/:id', async (req, res) => {
@@ -117,7 +105,7 @@ router.delete('/:id', async (req, res) => {
   try {
     book = await Book.findById(req.params.id)
     await book.remove()
-    res.redirect('/books')
+    res.redirect('/books/books')
   } catch {
     if (book != null) {
       res.render('books/show', {
@@ -125,7 +113,7 @@ router.delete('/:id', async (req, res) => {
         errorMessage: 'Could not remove book'
       })
     } else {
-      res.redirect('/books')
+      res.redirect('books/books')
     }
   }
 })

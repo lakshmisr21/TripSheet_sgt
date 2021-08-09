@@ -1,0 +1,6 @@
+GET http://localhost:3000/penalty/new
+//Content-Type: application/json
+
+//{
+    //"userId":2
+//}

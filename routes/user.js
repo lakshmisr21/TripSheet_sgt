@@ -1,119 +1,154 @@
-const express = require('express')
-const router = express.Router()
-User = require('../models/login')
+const express=require('express')
+const path=require('path')
+const bodyParser = require('express')
+const passport=require('passport-local-mongoose')
+const bcrypt=require('bcryptjs')
+const jwt=require('jsonwebtoken')
+const {ROLE,users}=require('../auth_role')
+const {authUser,authRole}=require('../basicAuth')
+User = require("../models/user")   
+User = require("../models/author") 
+User = require("../models/book") 
+
+const JWT_SECRET='1m6y3f8i5r0s2t5w7e4b*@#7a9p0p)3l2i6c7a9t4i1o0n8o6n4t2r6i7p4S5h6e3e1t8*&%$'
+
+const app=express()
+//app.set('view engine', 'html');
+//app.use(express.static('public'))
+app.use('/',express.static(path.join(__dirname,'public')))
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }))
 
 
-// All Users Route
+//link url not working
+//app.get('/public', (req,res)=>{ res.sendFile(__dirname + '/login-user.html')})
 
 
-router.get('/user', async (req, res) => {
-  let searchOptions = {}
-  if (req.query.mobile != null && req.query.mobile !== '') {
-    searchOptions.mobile = req.query.mobile
-  }
-  try {
-    const users = await User.find(searchOptions)
-    res.render('user/index', {
-      users: users,
-      searchOptions: req.query
+//ROUTES TO LOGIN AUTHENTICATION PAGE
+app.get('/', async (req, res) => {res.render('/index.html')})
+app.get('/login', async (req, res) => {res.render('/login.html')})
+app.get('/register', async (req, res) => {res.redirect('/register.html')})
+
+//ROUTES TO MAIN PAGE POST SUCCESSFULY LOGIN AUTHENTICATION
+app.get('/home', (req, res) => {
+
+//app.get('/home', authUser,authRole(ROLE.ADMIN),(req, res) => {
+	//app.get('/home', (req, res) => {
+	res.render('partials/header.ejs')
+})
+
+
+//ROUTES TO CHANGE PASSWORD POST LOGIN
+app.get('/changepwd'),async(req,res)=>{res.render('/change-password.html')}
+
+
+app.post('/api/change-password', async (req, res) => {
+	const { token, newpassword: plainTextPassword } = req.body
+
+	if (!plainTextPassword || typeof plainTextPassword !== 'string') {
+		return res.json({ status: 'error', error: 'Invalid password' })
+	}
+
+	if (plainTextPassword.length < 5) {
+		return res.json({
+			status: 'error',
+			error: 'Password too small. Should be atleast 6 characters'
+		})
+	}
+
+	try {
+		const user = jwt.verify(token, JWT_SECRET)
+
+		const _id = user.id
+
+		const password = await bcrypt.hash(plainTextPassword, 10)
+
+		await User.updateOne(
+			{ _id },
+			{
+				$set: { password }
+			}
+		)
+		res.json({ status: 'ok'})
+	} catch (error) {
+		console.log(error)
+		res.json({ status: 'error', error: ';))' })
+	}
+	throw error
+})
+
+//USER AUTHENTICATION ROUTES
+
+app.post('/api/login', async (req, res) => {
+	const { mobile, password } = req.body
+	const user = await User.findOne({ mobile }).lean()
+
+	if (!user) {
+		return res.json({ status: 'error', error: 'Invalid username/password' })
+	}
+
+	if (await bcrypt.compare(password, user.password)) {
+		// the username, password combination is successful
+
+		const token = jwt.sign(
+			{
+				id: user._id,
+				mobile: user.mobile
+			},
+			JWT_SECRET
+		)
+		return res.json({ status: 'ok', data: token,mobile:user.mobile })
+		
+	}
+	res.json({ status: 'error', error: 'Invalid username/password' })	
+ })
+
+
+app.post('/api/register',async (req,res)=>{
+    //console.log(req.body) //to view what user typed in the registration form
+    const {name,mobile,password:plainTextPassword}=req.body
+    //Authenticaion Process
+    if(!name || typeof name!=='string'){
+        return res.json({status:'error',error:'Invalid Username'})
+    }
+    if(!plainTextPassword || typeof plainTextPassword!=='string'){
+        return res.json({status:'error',error:'Invalid Password'})
+    }
+    if(plainTextPassword.length<5){
+        return res.json({status:'error',error:'Password is too small. Should be atleast 5 characters'})
+    }
+    if(mobile.length<10){
+        return res.json({status:'error',error:'Mobile number should be 10 numbers'})
+    }
+ 
+  //Hashing password
+  const password=await bcrypt.hash(plainTextPassword,10)
+
+  try{
+    const newuser=await User.create({
+        name,mobile,password
     })
-  } catch {
-    res.redirect('/')
-  }
-})
-
-
-/*
-router.get('/:id',(req,res)=>{
-    res.send('show Author' + req.params.id)
-})
-
-router.get('/:id/edit',(req,res)=>{
-    res.send('show Edit Author' + req.params.id)
-
-router.put('/:id',(req,res)=>{
-    res.send('show Update Author' + req.params.id)
-
-router.delete('/:id',(req,res)=>{
-    res.send('Delete Author' + req.params.id)
-*/
-
-
-
-router.get('/:id', async (req, res) => {
-    try {
-      const login = await User.findById(req.params.id)
-      //const books = await Book.find({ author: author.id }).limit(6).exec()
-      res.render('user/show', {
-        User: User        
-      })
-    } catch {
-      res.redirect('/')
+    
+  }catch (error){
+      //console.log(error)
+      //return res.json({status:'error'})
+      if (error.code === 11000) {
+        // duplicate key
+        return res.json({ status: 'error', error: 'Mobile already in use' })
     }
+    throw error
+  }
+     res.json({status:'ok'})
+})  
+
+//LOG OUT ROUTE
+
+app.delete('/logout', (req, res) => {
+	req.logOut()
+	res.redirect('/login.html')
   })
 
-router.get('/:id/edit', async (req, res) => {
-  try {
-    const users = await User.findById(req.params.id)
-    renderEditPage(res, users)
-  } catch {
-    res.redirect('/user')
-  }
-})
-//Update Users
+ 
 
-router.put('/:id', async (req, res) => {
-  let users
-  try {
-    users = await User.findById(req.params.id)
-    users.name = req.body.name
-    users.mobile = req.body.mobile
-     await users.save()
-    res.redirect(`/user/${users.id}`)
-  } catch {
-    if (users != null) {
-      renderEditPage(res, users, true)
-    } else {
-      redirect('/user')
-    }
-  }
-})
 
-router.delete('/user/:id', function (req, res) {
-  console.log("DELETING USER!")
-  User.findByIdAndRemove(req.params.id).then((User) => {
-    res.redirect('/user');
-  }).catch((err) => {
-    console.log(err.message);
-  })
-})
-
-async function renderNewPage(res, User, hasError = false) {
-  renderFormPage(res, User, 'new', hasError)
-}
-
-async function renderEditPage(res, User, hasError = false) {
-  renderFormPage(res, User, 'edit', hasError)
-}
-
-async function renderFormPage(res, User, form, hasError = false) {
-  try {
-    const users = await User.find({})
-    const params = {
-      //authors: authors,
-      User: User
-    }
-    if (hasError) {
-      if (form === 'edit') {
-        params.errorMessage = 'Error Updating User'
-      } else {
-        params.errorMessage = 'Error Creating User'
-      }
-    }
-    res.render(`users/${form}`, params)
-  } catch {
-    res.redirect('/user')
-  }
-}
-
-module.exports = router
+module.exports = app

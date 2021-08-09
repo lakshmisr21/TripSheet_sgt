@@ -42,13 +42,14 @@
 					// everythign went fine
 					console.log('Got the token: ', result.data)
 					localStorage.setItem('token', result.data)
-					//alert('Log In Success!')
-					window.location.href='/home.html' //navigating to Home page post successfuly log in
+					alert('Log In Success!')
+					window.location.href='/home' //navigating to Home page post successfuly log in
 				} else {
 					alert(result.error)
 					//window.location.href='/login'
 				}
 			}
+		
 		</script>
 	</body>
 </html>

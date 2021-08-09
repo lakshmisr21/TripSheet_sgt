@@ -3,7 +3,6 @@ const mongoose = require('mongoose')
 const penaltySchema = new mongoose.Schema({
 penaltydate: {
     type: Date,
-    required: true,
     default: Date.now
   },
   vehnum: {
@@ -14,9 +13,10 @@ penaltydate: {
     type: String,
     required: true
   },
-  lrnum: {
+  gcnum: {
     type: String,
-    required: true
+    required: true,
+    unique:true
   },
   partyname: {
     type: String,
@@ -27,26 +27,45 @@ penaltydate: {
     required: true
   },
   receivedamount: {
-    type: Number,
-    required: true
+  type: Number,
+  default:0.00
+  },
+  modifiedDate: {
+    type: Date,
+    default: Date.now
   },
   status:{
-    type: Boolean,
-    required: true
+    type: String,
+    default:'Pending'
   },
   coverImage: {
-    type: Buffer,
-    required: true
+    type: Buffer
+    
   },
+  receiptImage:{
+  type:Buffer
+  },
+  
   coverImageType: {
-    type: String,
-    required: true
+    type: String
+    
+  },
+  receiptImageType: {
+    type: String
+    
   }
 })
+
 
 penaltySchema.virtual('coverImagePath').get(function() {
   if (this.coverImage != null && this.coverImageType != null) {
     return `data:${this.coverImageType};charset=utf-8;base64,${this.coverImage.toString('base64')}`
+  }
+})
+
+penaltySchema.virtual('receiptImagePath').get(function() {
+  if (this.receiptImage != null && this.receiptImageType != null) {
+    return `data:${this.receiptImageType};charset=utf-8;base64,${this.receiptImage.toString('base64')}`
   }
 })
 

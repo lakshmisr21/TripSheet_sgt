@@ -4,7 +4,7 @@ const Author = require('../models/author')
 const Book = require('../models/book')
 
 // All Authors Route
-router.get('/', async (req, res) => {
+router.get('/all', async (req, res) => {
   let searchOptions = {}
   if (req.query.name != null && req.query.name !== '') {
     searchOptions.name = new RegExp(req.query.name, 'i')
@@ -16,7 +16,7 @@ router.get('/', async (req, res) => {
       searchOptions: req.query
     })
   } catch {
-    res.redirect('/')
+    res.redirect('/authors')
   }
 })
 
@@ -36,7 +36,7 @@ router.post('/', async (req, res) => {
   } catch {
     res.render('authors/new', {
       author: author,
-      errorMessage: 'Error creating Author'
+      errorMessage: 'Error creating:Place already exists'
     })
   }
 })
@@ -87,7 +87,7 @@ router.delete('/:id', async (req, res) => {
   try {
     author = await Author.findById(req.params.id)
     await author.remove()
-    res.redirect('/authors')
+    res.redirect('/authors/all')
   } catch {
     if (author == null) {
       res.redirect('/')

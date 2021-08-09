@@ -1,21 +1,31 @@
-<!--
+
 <link rel="stylesheet" href="/public/stylesheets/main.css">
 <header>
-    <nav class="header-nav">
-      <a class="header-title" href="/"><H1>Trip Sheet Home Page</H1></a>
-      <ul>
         
-        <li class="header-link"><a href="/authors">Places</a></li>
+    <nav class="header-nav">
+      <a class="header-title" href="/home"><H1>Trip Sheet Home Page</H1></a>
+      
+      <ul>
+        <li class="header-link"><a href="/authors/all">Places</a></li>
         <li class="header-link"><a href="/authors/new">Add Place</a></li> 
-        <li class="header-link"><a href="/books">Search TripSheet</a></li>
+        <li class="header-link"><a href="/books/books">Search TripSheet</a></li>
         <li class="header-link"><a href="/books/new">Add TripSheet</a></li>
-        <li class="header-link"><a href="/reports">Reports</a></li> 
-         <form class="header-link" action="/logout?_method=DELETE" method="POST">
+        <li class="header-link"><a href="/missing/reports">Reports</a></li> 
+        <li class="header-link"><a href="/users">Users</a></li> 
+        <form class="header-link" action="/logout?_method=DELETE" method="POST">
           <button class="btn btn" type="submit">Log Out</button>
         </form>
       </ul>
   </nav>  
 </header>
+
+<!--
+  <script type="text/javascript">
+    function preventBack() { window.history.forward(); }
+    setTimeout("preventBack()", 0);
+    window.onunload = function () { null };
+  </script>
+  
 -->
 
 

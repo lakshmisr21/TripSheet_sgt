@@ -1,21 +1,7 @@
-<h2>Search Registered Users</h2>
-<form action="/user" method="GET">
-<div>  <input type="number" name="mobile" placeholder="Enter Mobile" value="<%= searchOptions.mobile %>"> </div> 
-<div><button class="btn btn" type="submit">Search</button> </div>
-</form>
-<br>
-<table>
- 
-<tr>
-  <th>
-<% users.forEach(User => { %> 
-  <%= User.name %>  | <%= User.mobile %> 
-  <a href="/user/<%= User.id %>/edit">Edit</a>
-  <%- include('../partials/deleteForm',
-  {url: `/user/${User.id}` }) %>
-  <% }) %> 
-  </th> <br>
-</tr>
-
-
-</table>  
+<img src="LogIn.JPG" height="200" width="250" > 
+<div>
+     <button><a class="btn btn" href="/login"> Existing User Login </a> </button>
+</div>
+<div>
+<button><a class="btn btn" href="/register">New User Registration</a> </button>
+</div>

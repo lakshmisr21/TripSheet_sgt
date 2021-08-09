@@ -1,0 +1,85 @@
+<h1>Add New Penalties</h1>
+
+<form action="/penalty/penalty" method="GET">
+  <div>
+    <button> <a class='btn btn' href="/penalty/new">New Penalty Form </a></button>
+  <!--  <button> <a class='btn btn' href="/home">Home Page </a></button> 
+    <button> <a class='btn btn' href="/missing/reports">Reports Page </a></button> -->
+  </div>
+  
+  <h1>Search Penalty Information</h1>
+  <div> <button class='btn btn' type="submit">Search</button> </div>
+  <div class="dropdown" class="btn btn">
+    <label>Penalty Status</label>
+  <select name="status" id="status">
+    <option value="closed" selected="selected"> Closed</option>
+    <option value="pending" selected="selected"> Pending</option>  
+    <option value="" selected="selected"> Select All</option>    
+  </select>
+  </div>
+  <div>
+    <label>GC Number</label>
+    <input type="text" name="gcnum" value="<%= searchOptions.gcnum %>">
+  </div>
+  <!--<div>
+    <label>Penalty Status</label>
+    <input type="text" name="status" value="<%= searchOptions.status %>">
+  </div>-->
+</form>
+<br>
+  <table>
+    <tr class="header"> 
+      <th> <label>Penalty Date</label> </th>
+      <th> <label>Vehicle Number</label> </th>
+      <th> <label>GC Number</label> </th>
+      <th> <label>Party Name</label> </th> 
+      <th> <label>Penalty Amount</label> </th>
+      <th> <label>Received Amount</label> </th> 
+      <th> <label>Modified Date</label> </th> 
+      <th> <label>Penalty Image Link</label> </th>
+      <th> <label>Receipt Image Link</label> </th>
+      <th> <label>Update</label> </th>
+      <th> <label>Delete</label> </th>
+  </tr>
+
+  <% penalties.forEach(Penalty => { %>
+    <tr>
+    <th> <%= Penalty.penaltydate.toDateString() %> </th>  
+    <th> <%= Penalty.vehnum %> </th> 
+    <th> <%= Penalty.gcnum %> </th> 
+    <th> <%= Penalty.partyname %> </th>
+    <th> <%= Penalty.penaltyamount %> </th>
+    <th> <%= Penalty.receivedamount %> </th>
+    <th> <%= Penalty.modifiedDate.toDateString()%> </th>
+    <th>
+      <a href="/penalty/<%= Penalty.id %>">
+        <img height="75" width="100" src="<%= Penalty.coverImagePath %>">
+      </a>
+    </th>
+    <th>
+      <a href="/penalty/<%= Penalty.id %>">
+        <img height="75" width="100" src="<%= Penalty.receiptImagePath %>">
+      </a>
+    </th>
+    <th> 
+      <a href="/penalty/<%= Penalty.id %>/edit">Update</a> </th>
+     <th>
+    <%- include('../partials/deleteForm',{url: `/penalty/${Penalty.id}` }) %> 
+    <% }) %> 
+    </th>
+  </tr>
+    <br>
+  </table> 
+
+
+<!--  To Display All Images of Penalty Database    
+<div>
+  <% penalties.forEach(penalty => { %>
+    <a href="/penalty/<%= penalty.id %>">
+      <img height="500" width="450" src="<%= penalty.coverImagePath %>">
+    </a>
+  <% }) %>
+</div>
+
+-->
+
