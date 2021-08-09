@@ -1,11 +1,11 @@
 const express=require('express')
 const path=require('path')
 const bodyParser = require('express')
-const passport=require('passport-local-mongoose')
+//const passport=require('passport-local-mongoose')
 const bcrypt=require('bcryptjs')
 const jwt=require('jsonwebtoken')
-const {ROLE,users}=require('../auth_role')
-const {authUser,authRole}=require('../basicAuth')
+//const {ROLE,users}=require('../auth_role')
+//const {authUser,authRole}=require('../basicAuth')
 User = require("../models/user")   
 User = require("../models/author") 
 User = require("../models/book") 
@@ -30,10 +30,10 @@ app.get('/login', async (req, res) => {res.render('/login.html')})
 app.get('/register', async (req, res) => {res.redirect('/register.html')})
 
 //ROUTES TO MAIN PAGE POST SUCCESSFULY LOGIN AUTHENTICATION
-app.get('/home', (req, res) => {
 
 //app.get('/home', authUser,authRole(ROLE.ADMIN),(req, res) => {
-	//app.get('/home', (req, res) => {
+	app.get('/home',(req, res) => {
+//app.get('/home', (req, res) => {
 	res.render('partials/header.ejs')
 })
 
