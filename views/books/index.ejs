@@ -3,7 +3,6 @@
 <form action="/books/books" method="GET">
   <div>
     <button class='btn btn' type="submit">Search</button>
-    <button> <a class='btn btn' href="/home.html">Back </a></button>
   </div>
   <div>
     <label>Trip Sheet Number</label>
@@ -27,7 +26,10 @@
 <div>
   <% books.forEach(book => { %>
     <a href="/books/<%= book.id %>">
-      <img height="500" width="450" src="<%= book.coverImagePath %>">
+      <img height="650" width="600" src="<%= book.coverImagePath %>">
     </a>
   <% }) %>
 </div>
+<iframe src="/books/books" width=650 height="600" align="left"> </iframe>  
+<iframe src="/books/books" width=650 height="600" align="right"> </iframe>
+  

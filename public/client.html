@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/stylesheets/nav.css">
+<script src="books.js" async></script>
+</head>
+<body>
+
+<div class="navbar">
+  <a href="/client.html">Home</a>
+  
+  <div class="dropdown">
+    <button class="dropbtn">Trip Sheet 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="/books/books">Search Trip Sheet</a>
+      <a href="/books/new">Add Trip Sheet</a>
+    </div>
+   </div> 
+
+   <div class="dropdown">
+    <button class="dropbtn">Penalty 
+      <i class="fa fa-caret-down"></i>
+    </button>
+    <div class="dropdown-content">
+      <a href="/penalty/penalty">Search Penalty</a>
+      
+    </div>
+   </div> 
+
+   <a href="#logout">LogOut</a>
+</div>
+
+<div id="nav-placeholder"> </div>
+
+<script>
+$(function(){
+  $("#nav-placeholder").load("nav.html");
+});
+
+</script>
+
+<script type="text/javascript">
+    function preventBack() { window.history.forward(); }
+    setTimeout("preventBack()", 0);
+    window.onunload = function () { null };
+</script>
+
+</body>
+</html>
+
+

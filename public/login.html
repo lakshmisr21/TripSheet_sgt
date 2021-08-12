@@ -9,14 +9,72 @@
 <header>
 	<link rel="stylesheet" href="/stylesheets/main.css">	
 </header>
-<body>
-	<h1>Login</h1>
-	<form class="input" id="login-form">
-			<input type="number" autocomplete="off" id="mobile" placeholder="Mobile" />
-			<input type="password" autocomplete="off" id="password" placeholder="Password" />
-			<input type="submit" value="Submit" /> 
-	</form>
 
+<style>
+	body, html {
+	  height: 100%;
+	  font-family: Arial, Helvetica, sans-serif;
+	}
+	
+	* {
+	  box-sizing: border-box;
+	}
+	
+	.bg-img {
+	  /* The image used */
+	  background-image: url("nature.jpg");
+	  min-height: 630px;
+	
+	  /* Center and scale the image nicely */
+	  background-position: center;
+	  background-repeat: no-repeat;
+	  background-size: cover;
+	  position: relative;
+	}
+	
+	/* Add styles to the form container */
+	.container {
+	  position: absolute;
+	  right: 0;
+	  margin: 20px;
+	  max-width: 300px;
+	  padding: 16px;
+	  background-color: rgb(17, 16, 16);
+	  display: inline-block;
+	  align-items: center;
+	}
+	
+	
+	
+	/* Set a style for the submit button */
+	.btn {
+	  background-color: #04AA6D;
+	  color: white;
+	  padding: 16px 20px;
+	  border: none;
+	  cursor: pointer;
+	  width: 40%;
+	  opacity: 0.9;
+	  align-items: center;
+	}
+	
+	.btn:hover {
+	  opacity: 1;
+	}
+	
+	</style>
+
+
+<body>
+	
+	<div class="bg-img">
+	<form class="container" id="login-form">
+		<h1>Login</h1>
+			<input  type="number" autocomplete="off" id="mobile" placeholder="Mobile" />
+			<input type="password" autocomplete="off" id="password" placeholder="Password" />
+			<input class="btn" type="submit" value="Submit" /> 
+	</form>
+	</div>
 
 		<script>
 			const form = document.getElementById('login-form')
@@ -43,11 +101,17 @@
 					console.log('Got the token: ', result.data)
 					localStorage.setItem('token', result.data)
 					alert('Log In Success!')
-					window.location.href='/home' //navigating to Home page post successfuly log in
+					//alert(mobile)
+					
+						if(mobile==1234567890){
+							//document.write(mobile) //displays mobile number in same loginhtml page
+							window.location.href=('/admin') //navigating to Admin Home page post successfuly log in
+							} else {
+							window.location.href='/client.html'
+						}
 				} else {
 					alert(result.error)
-					//window.location.href='/login'
-				}
+					}
 			}
 		
 		</script>

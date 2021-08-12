@@ -6,7 +6,8 @@ const imageMimeTypes = ['image/jpeg', 'image/JPG','image/png', 'images/gif','ima
 //Pending Trip Sheets
 
 router.get('/pending', (req, res) => {
-  //res.render('pending/pending')
+  //res.send('Pending Report View')
+  res.render('pending/index')
 })
 
 router.post('/pending', (req, res) => {

@@ -1,9 +1,9 @@
 
-<link rel="stylesheet" href="/public/stylesheets/main.css">
+<!--<link rel="stylesheet" href="/public/stylesheets/main.css">
 <header>
         
     <nav class="header-nav">
-      <a class="header-title" href="/home"><H1>Trip Sheet Home Page</H1></a>
+      <a class="header-title" href="/admin"><H1>Trip Sheet Home Page</H1></a>
       
       <ul>
         <li class="header-link"><a href="/authors/all">Places</a></li>
@@ -11,7 +11,7 @@
         <li class="header-link"><a href="/books/books">Search TripSheet</a></li>
         <li class="header-link"><a href="/books/new">Add TripSheet</a></li>
         <li class="header-link"><a href="/missing/reports">Reports</a></li> 
-        <li class="header-link"><a href="/users">Users</a></li> 
+        <li class="header-link"><a href="/users/users">Users</a></li> 
         <form class="header-link" action="/logout?_method=DELETE" method="POST">
           <button class="btn btn" type="submit">Log Out</button>
         </form>
@@ -25,8 +25,90 @@
     setTimeout("preventBack()", 0);
     window.onunload = function () { null };
   </script>
-  
+-->
 
+  
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+<link rel="stylesheet" href="/stylesheets/nav.css">
+
+</head>
+<body>
+  
+  <div class="navbar">
+    <!--<a href="/admin">Home</a>-->
+    <a href="/index">Index</a>
+    <div class="dropdown">
+      <button class="dropbtn">Place 
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a href="/authors/all">Places</a>
+        <a href="/authors/new">Add Places</a>
+      </div>
+    </div> 
+
+    <div class="dropdown">
+      <button class="dropbtn">Trip Sheet
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a href="/books/books">Trip Sheet Search</a>
+        <a href="/books/new">Add New Trip Sheets</a>
+      </div>
+    </div> 
+
+    <div class="dropdown">
+      <button class="dropbtn">Penalty
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a href="/penalty/penalty">Penalty</a>
+        <a href="/penalty/new">Add New Penalty</a>
+      </div>
+    </div> 
+
+    <div class="dropdown">
+      <button class="dropbtn">Reports
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+        <a href="/pending/pending">Pending</a>
+        <a href="/damaged/damaged">Damaged</a>
+        <a href="/missing/missing">Missing</a>
+      </div>
+    </div> 
+
+    
+  <div class="dropdown">
+      <button class="dropbtn">Users Profile
+        <i class="fa fa-caret-down"></i>
+      </button>
+      <div class="dropdown-content">
+      <a href="/users/users">Existing Users</a>
+      <a href="/register.html"> New User Sign Up</a>
+      <a href="/login.html"> Login</a>
+      <a href="/change-password.html"> Change Password</a>
+     <!--<a> <form action= "/logout?_method=DELETE" method="POST"> LogOut</form> </a>
+     <a href="/logout?_method=DELETE">LogOut </a> -->
+     <form action="/logout?_method=DELETE" method="POST">
+      <button class="btn btn" type="submit">Log Out</button>
+    </form>
+      </div>
+    </div>
+  </div>
+      
+</body>
+
+</html>
+<script type="text/javascript">
+  function preventBack() { window.history.forward(); }
+  setTimeout("preventBack()", 0);
+  window.onunload = function () { null };
+</script>
 
 
 

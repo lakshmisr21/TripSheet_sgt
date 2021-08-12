@@ -1,15 +1,29 @@
 const express = require('express')
 const router = express.Router()
 const Book = require('../models/book')
-
+const Author = require('../models/author')
+/*
 router.get('/', async (req, res) => {
-  let books
+  let book
   try {
-    books = await Book.find().sort({ createdAt: 'desc' }).limit(10).exec()
+    book = await Book.find().sort({ createdAt: 'desc' }).limit(10).exec()
   } catch {
-    books = []
+    book = []
   }
-  res.render('index', { books: books })
+  res.render('index', { book: book })
+})*/
+
+//router.get('/:id', async (req, res) => {
+  router.get('/', async (req, res) => {
+  try {
+    const book = await Book.find(req.params.id)
+                           .populate('author')
+                           .exec()
+    //res.render('books/show', { book: book })
+    res.render('index', { book: book })
+  } catch {
+    res.redirect('/')
+  }
 })
 
 module.exports = router

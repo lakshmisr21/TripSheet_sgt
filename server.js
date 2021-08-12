@@ -1,16 +1,13 @@
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config()
   }
-  
+ 
 const express = require('express')
 const app = express()
 const expressLayouts = require('express-ejs-layouts')
 const bodyParser = require('express')
 const passport = require('passport')
 const methodOverride = require('method-override')
-//const {users}=require('./auth_role')
-//const {authUser,authRole}=require('./basicAuth')
-
 
 const indexRouter=require('./routes/index')
 const userRouter = require('./routes/user')
@@ -22,6 +19,9 @@ const pendingRouter = require('./routes/pending')
 const damagedRouter = require('./routes/damaged')
 const penaltyRouter = require('./routes/penalty')  
 
+
+app.set('html', __dirname + '/public')
+  //app.set('view engine', 'html')
   app.set('view engine', 'ejs')
   app.set('views', __dirname + '/views')
   app.set('layout', 'layouts/layout')
@@ -38,7 +38,7 @@ const penaltyRouter = require('./routes/penalty')
   
   app.use('/', userRouter)
   app.use('/users',usersRouter)
-  app.use('/',indexRouter)
+  app.use('/index',indexRouter)
   app.use('/authors', authorRouter)
   app.use('/books', bookRouter)
   app.use('/missing',missingRouter)
@@ -46,4 +46,4 @@ const penaltyRouter = require('./routes/penalty')
   app.use('/damaged',damagedRouter)
   app.use('/penalty',penaltyRouter)
   
-  app.listen(process.env.PORT || 3000)
+app.listen(process.env.PORT || 3000)

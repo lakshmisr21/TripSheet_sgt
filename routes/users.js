@@ -6,7 +6,7 @@ User = require('../models/user')
 // All Users Route
 
 
-router.get('/', async (req, res) => {
+router.get('/users', async (req, res) => {
   let searchOptions = {}
   if (req.query.mobile != null && req.query.mobile !== '') {
     searchOptions.mobile = req.query.mobile
@@ -18,7 +18,7 @@ router.get('/', async (req, res) => {
       searchOptions: req.query
     })
   } catch {
-    res.redirect('/')
+    res.redirect('/users')
   }
 })
 
@@ -31,7 +31,7 @@ router.get('/:id', async (req, res) => {
       user: user,
     })
   } catch {
-    res.redirect('/')
+    res.redirect('/users')
   }
 })
 
@@ -54,7 +54,7 @@ router.put('/:id', async (req, res) => {
     user.name = req.body.name
     user.mobile = req.body.mobile
     await user.save()
-    res.redirect(`users/${user.id}`)
+    res.redirect(`/users/${user.id}`)
   } catch {
     if (user != null) {
       renderEditPage(res, user, true)
@@ -68,25 +68,25 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', function (req, res) {
   console.log("DELETING USER!")
   User.findByIdAndRemove(req.params.id).then((User) => {
-    res.redirect('/users');
+    res.redirect('/');
   }).catch((err) => {
     console.log(err.message);
   })
 })
 
-async function renderNewPage(res, User, hasError = false) {
-  renderFormPage(res, User, 'new', hasError)
+async function renderNewPage(res, user, hasError = false) {
+  renderFormPage(res, user, 'new', hasError)
 }
 
-async function renderEditPage(res, User, hasError = false) {
-  renderFormPage(res, User, 'edit', hasError)
+async function renderEditPage(res, user, hasError = false) {
+  renderFormPage(res, user, 'edit', hasError)
 }
 
-async function renderFormPage(res, User, form, hasError = false) {
+async function renderFormPage(res, user, form, hasError = false) {
   try {
-    const users = await User.find({})
+    const user = await User.find({})
     const params = {
-      users: users
+      user: user
     }
     if (hasError) {
       if (form === 'edit') {

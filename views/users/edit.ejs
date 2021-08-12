@@ -1,6 +1,8 @@
 <h2>Edit Users</h2>
-<form action="/users<%= user.id %>?_method=PUT" method="POST">
-  <a href="/users/<%= user.id %>">Cancel</a>
-  <button type="submit">Update</button>
+<form action="/users/<%= user.id %>?_method=PUT" method="POST">
+  <div> 
+    <button class="btn btn"><a href="/users/users">Cancel</a> </button>  
+    <button class="btn btn" type="submit">Update</button> 
+  </div> <br>
   <%- include('_form_fields') %>
 </form>

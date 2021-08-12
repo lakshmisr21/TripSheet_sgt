@@ -1,0 +1,148 @@
+:root{
+  font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: large;
+  background:rgb(227, 247, 153);
+  color:rgb(3, 59, 12);
+  align-content: center;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+  }
+  
+  .navbar {
+    overflow: hidden;
+    background-color: rgb(74, 206, 80);
+  }
+  
+  .navbar a {
+    float: left;
+    font-size: 16px;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+  }
+  
+  .dropdown {
+    float: left;
+    overflow: hidden;
+  }
+  
+  .dropdown .dropbtn {
+    font-size: 16px;  
+    border: none;
+    outline: none;
+    color: rgb(255, 255, 255);
+    padding: 14px 16px;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+  
+  .navbar a:hover, .dropdown:hover .dropbtn {
+    background-color: rgb(87, 31, 243);
+  }
+  
+  .dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+  .dropdown-content a {
+    float: none;
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-content a:hover {
+    background-color: #ddd;
+  }
+  
+  .dropdown:hover .dropdown-content {
+    display: block;
+  }
+
+
+  .btn{
+    border:rgb(24, 23, 23) 1px solid;
+    border-radius: .5rem;
+    padding:.5rem 1rem;
+    font-size: 1.2rem;
+    font-family: 'Gothic';
+    cursor: pointer;
+    text-decoration: none;
+    text-align-last: center;
+    display: flex;
+    align-items: flex-start;
+    color:rgb(229, 230, 238);
+    background-color: rgb(3, 136, 10);
+}
+
+a: link {
+  color: red;
+  font-size: 1.2rem;
+  display:block;
+  text-align:center
+}
+
+.btn-danger{
+  color: rgb(9, 10, 9);
+  background-color: rgb(240, 45, 45);
+}
+
+.btn-row{
+  color: rgb(26, 9, 122);
+  background-color: rgb(123, 241, 241);
+}
+
+input{
+    width:fit-content;
+    box-sizing: border-box;
+    padding: 12px 20px;
+    margin: 8px 0;
+    border: 2px solid rgb(16, 2, 39);
+    border-radius: 4px;
+}
+
+.input-row{
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.input-name{
+    font-size: 1.5rem;
+}
+
+.column_count {
+  column-count: 2;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+table.list{
+    width: 100%;
+}
+
+table{
+  width:80%;
+      
+}
+
+header td,tr,th{
+  background-color: rgb(206, 250, 198);
+  border:1px solid rgb(3, 104, 13);
+  text-align: left;
+  padding: 8px;
+  color: rgb(12, 12, 12);
+}

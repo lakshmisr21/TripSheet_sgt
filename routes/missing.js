@@ -15,8 +15,8 @@ router.get('/reports', (req, res) => {
 //Missing Trip Sheets GC
 
 router.get('/missing', (req, res) => {
-  //res.render('missing/missing')
-  res.send('Missing Report View')
+  res.render('missing/index')
+  //res.send('Missing Report View')
 })
 
 router.post('/missing', (req, res) => {

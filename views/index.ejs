@@ -1,0 +1,27 @@
+  <h1>Recently Added Trip Sheets</h1>
+  
+  <table>
+    <tr class="header"> 
+      <th> <label>Trip Sheet Number</label> </th>
+      <th> <label>Vehicle Number</label> </th>
+      <th> <label>Place</label> </th>
+      <th> <label>Trip Date</label> </th> 
+      <th> <label>Trip Sheet Image Link</label> </th>
+    </tr>
+
+  <% book.forEach(Book => { %>
+    <tr>
+    <th> <%= Book.title %> </th>
+    <th> <%= Book.description %> </th>
+    <th> <%= Book.author.name %> </th>
+    <th> <%= Book.publishDate.toDateString() %> </th>  
+     
+    <th>
+      <a href="/books/<%= Book.id %>">
+        <img height="75" width="100" src="<%= Book.coverImagePath %>">
+      </a>
+    </th>
+    <% }) %>     
+  </tr>
+    <br>
+  </table> 

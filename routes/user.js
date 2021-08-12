@@ -1,27 +1,16 @@
 const express=require('express')
 const path=require('path')
 const bodyParser = require('express')
-//const passport=require('passport-local-mongoose')
 const bcrypt=require('bcryptjs')
 const jwt=require('jsonwebtoken')
-//const {ROLE,users}=require('../auth_role')
-//const {authUser,authRole}=require('../basicAuth')
 User = require("../models/user")   
-User = require("../models/author") 
-User = require("../models/book") 
-
-const JWT_SECRET='1m6y3f8i5r0s2t5w7e4b*@#7a9p0p)3l2i6c7a9t4i1o0n8o6n4t2r6i7p4S5h6e3e1t8*&%$'
 
 const app=express()
-//app.set('view engine', 'html');
-//app.use(express.static('public'))
+
 app.use('/',express.static(path.join(__dirname,'public')))
-app.use(bodyParser.json())
+app.use(express.json())
 app.use(bodyParser.urlencoded({ limit: '10mb', extended: false }))
 
-
-//link url not working
-//app.get('/public', (req,res)=>{ res.sendFile(__dirname + '/login-user.html')})
 
 
 //ROUTES TO LOGIN AUTHENTICATION PAGE
@@ -31,11 +20,17 @@ app.get('/register', async (req, res) => {res.redirect('/register.html')})
 
 //ROUTES TO MAIN PAGE POST SUCCESSFULY LOGIN AUTHENTICATION
 
-//app.get('/home', authUser,authRole(ROLE.ADMIN),(req, res) => {
-	app.get('/home',(req, res) => {
-//app.get('/home', (req, res) => {
+
+app.get('/admin',async (req, res) => {
 	res.render('partials/header.ejs')
+	})
+
+app.get('/client.html', (req, res) => {
+	res.render('/client.html')
 })
+
+
+
 
 
 //ROUTES TO CHANGE PASSWORD POST LOGIN
@@ -57,8 +52,8 @@ app.post('/api/change-password', async (req, res) => {
 	}
 
 	try {
-		const user = jwt.verify(token, JWT_SECRET)
-
+		//const user = jwt.verify(token, JWT_SECRET)
+		const user = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
 		const _id = user.id
 
 		const password = await bcrypt.hash(plainTextPassword, 10)
@@ -88,17 +83,17 @@ app.post('/api/login', async (req, res) => {
 	}
 
 	if (await bcrypt.compare(password, user.password)) {
-		// the username, password combination is successful
-
+		//If the username, password combination is successful
+		//Create and assign Token
+				
 		const token = jwt.sign(
 			{
 				id: user._id,
 				mobile: user.mobile
 			},
-			JWT_SECRET
-		)
-		return res.json({ status: 'ok', data: token,mobile:user.mobile })
-		
+			process.env.ACCESS_TOKEN_SECRET
+			)
+		return res.json({ status: 'ok', data: token})
 	}
 	res.json({ status: 'error', error: 'Invalid username/password' })	
  })
@@ -147,8 +142,5 @@ app.delete('/logout', (req, res) => {
 	req.logOut()
 	res.redirect('/login.html')
   })
-
- 
-
 
 module.exports = app
