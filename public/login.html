@@ -100,15 +100,9 @@
 					// everythign went fine
 					console.log('Got the token: ', result.data)
 					localStorage.setItem('token', result.data)
-					alert('Log In Success!')
-					//alert(mobile)
-					
-						//if(mobile==1234567890){
-							//document.write(mobile) //displays mobile number in same loginhtml page
-							window.location.href=('/admin') //navigating to Admin Home page post successfuly log in
-							//} else {
-							//window.location.href='/client.html'
-						//}
+					//alert('Log In Success!')
+				    window.location.href=('/admin') //navigating to Admin Home page post successfuly log in
+							
 				} else {
 					alert(result.error)
 					}

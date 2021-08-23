@@ -68,7 +68,7 @@ router.put('/:id', async (req, res) => {
 router.delete('/:id', function (req, res) {
   console.log("DELETING USER!")
   User.findByIdAndRemove(req.params.id).then((User) => {
-    res.redirect('/');
+    res.redirect('/users/users');
   }).catch((err) => {
     console.log(err.message);
   })
